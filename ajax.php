@@ -5,31 +5,41 @@ $config = mysqli_connect("localhost", "root", "secret", "sms");
 
 Header("Cache-Control: no-cache, must-revalidate"); 
 Header("Pragma: no-cache");
-Header("Content-Type: text/javascript; charset=utf-8"); 
+//Header("Content-Type: text/javascript; charset=utf-8"); 
 
 // проверяем есть ли переменная act (send или load), которая указываем нам что делать
-if (isset($_GET['act'])) {
-    switch ($_GET['act']) {
-        case "send" : 
-            Send();
-            break;
-        case "load" : 
-            Load();
-            break;
-        default : 
-            exit();
-    }
+
+//var_dump($_GET);
+//var_dump($_POST);
+
+$act = null;
+
+if (isset($_GET['act']))
+    $act = $_GET['act'];
+else if (isset($_POST['act']))
+    $act = $_POST['act'];
+        
+    
+switch ($act) {
+    case "send" : 
+        Send();
+        break;
+    case "load" : 
+        Load();
+        break;
+    default : 
+        exit();
 }
 
 // Сохранение смс в базе
 function Send()
 {
     global $config;
-    $number = isset($_POST['number']);
+    $number = isset($_POST['number']); //bool
     $text = isset($_POST['text']);
     
     mysqli_query($config,"INSERT INTO sms_tasks (number,text) VALUES ($number,  $text)");
-    }
+}
     
 
 
@@ -40,32 +50,50 @@ function Load()
     global $config;
     $last_message_id = intval($_POST['last']); // возвращает целое значение переменной
 
+
+
     // выполняем запрос к базе данных для получения сообщений
-    $query = mysqli_real_query($config,"SELECT * FROM ");
+    $result = mysqli_query($config,"SELECT * FROM sms_tasks");
     // проверяем есть ли какие-нибудь новые сообщения
-    if ($query > 0) {
-    // начинаем формировать javascript который мы передадим клиенту
-    $js = 'var chat = $("#chat_area");'; // получаем "указатель" на div, в который мы добавим новые сообщения
+    echo "result\n";
+    var_dump($result);
+    
+    if ($result) {
+        // начинаем формировать javascript который мы передадим клиенту
+        $js = 'var chat = $("#chat_area");'; // получаем "указатель" на div, в который мы добавим новые сообщения
 
-    // следующий конструкцией мы получаем массив сообщений из нашего запроса
-    $messages = array();
-    while ($row = mysqli_fetch_array($query)) {
-    $messages[] = $row;
-    }
+        // следующий конструкцией мы получаем массив сообщений из нашего запроса
+        $messages = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $messages[] = $row;
+        }
 
-    $messages = array_reverse($messages);
+        echo "messages";
+        var_dump($messages);
 
-    // идём по всем элементам массива $messages
-    foreach ($messages as $value) {
-    // продолжаем формировать скрипт для отправки пользователю
-    $js .= 'chat.append("<span>' . $value['number'] . '&raquo; ' . $value['text'] . '</span>");'; // добавить сообщние (<span>Имя &raquo; текст сообщения</span>) в наш div
-    }
+        $messages = array_reverse($messages);
 
-    $js .= "last_message_id = $last_message_id;"; // запишем номер последнего полученного сообщения, что бы в следующий раз начать загрузку с этого сообщения
+        // идём по всем элементам массива $messages
+        foreach ($messages as $value) {
+            // продолжаем формировать скрипт для отправки пользователю
+            $js .= 'chat.append("<span>' . $value['number'] . '&raquo; ' . $value['text'] . '</span>");'; // добавить сообщние (<span>Имя &raquo; текст сообщения</span>) в наш div
+        }
 
-    // отправляем полученный код пользователю, где он будет выполнен при помощи функции eval()
-    echo $js;
+        $js .= "last_message_id = $last_message_id;"; // запишем номер последнего полученного сообщения, что бы в следующий раз начать загрузку с этого сообщения
+
+        // отправляем полученный код пользователю, где он будет выполнен при помощи функции eval()
+        echo $js;
     }
 }
 mysqli_close($config);
+
+//$result = [
+//    'result' => 'success',
+//    'data' => '123'
+//];
+//
+//print json_encode($result);
+//exit();
 ?>
+
+
