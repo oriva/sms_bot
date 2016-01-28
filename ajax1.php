@@ -38,19 +38,16 @@ function Load()
 {
     //  $_POST['last'] - номер последнего сообщения которое загрузилось у пользователя
     global $config;
-    $last_message_id = intval($_POST['last']); // возвращает целое значение переменной
-
-    // выполняем запрос к базе данных для получения сообщений
-    $query = mysqli_real_query($config,"SELECT * FROM ");
-    // проверяем есть ли какие-нибудь новые сообщения
-    if ($query > 0) {
-    // начинаем формировать javascript который мы передадим клиенту
+    $last_message_id = 0; // возвращает целое значение переменной
+    $query = mysqli_real_query($config,"SELECT * FROM sms_tasks");
     $js = 'var chat = $("#chat_area");'; // получаем "указатель" на div, в который мы добавим новые сообщения
-
+    if ($query > 0){
     // следующий конструкцией мы получаем массив сообщений из нашего запроса
     $messages = array();
-    while ($row = mysqli_fetch_array($query)) {
-    $messages[] = $row;
+    while ($row = mysqli_fetch_array($res)) {
+    $res = $connect->query("SELECT * FROM sms_tasks WHERE id=$last_message_id");
+    $messages[] = $res;
+    $last_message_id=$last_message_id+1;
     }
 
     $messages = array_reverse($messages);
