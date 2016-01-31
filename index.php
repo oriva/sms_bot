@@ -41,6 +41,7 @@
       
         <div class="container">
             <div id="chat_area"><!-- Сюда мы будем добавлять новые сообщения -->
+                <pre><tr><td>Телефон: </td><td>89500521912</td></tr></pre>
             </div>
         </div>  
        

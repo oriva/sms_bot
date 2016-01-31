@@ -1,36 +1,37 @@
 
 console.log("index.js loaded");
 
+
 $(document).ready(function () {
-    $("#inputForm").submit(Send); // вешаем на форму с именем и сообщением событие которое срабатывает когда нажата кнопка "Отправить" или "Enter"
-    $("#inputText").focus(); // по поле ввода сообщения ставим фокус
-    setInterval(Load, 5000); // создаём таймер который будет вызывать загрузку сообщений каждые 2 секунды (2000 миллисекунд)
+    $("#inputForm").submit(Send); 
+    $("#inputText").focus(); 
+    setInterval(Load, 5000); 
 });
 
+var load_in_process = false;
 
 function Send() {
-    // Выполняем запрос к серверу с помощью jquery ajax: $.post(адрес, {параметры запроса}, функция которая вызывается по завершению запроса)
-    $.postJson("ajax.php",
+    // Выполняем запрос к серверу с помощью 
+    console.log("==111")
+    $.post("ajax_giveMsg.php",
             {
                // if ( valid()){
                 act: "send",  // указываем скрипту, что мы отправляем новое сообщение и его нужно записать
-                number: $("#inputNumber").val(), // имя пользователя
-                text: $("#inputText").val() //  сам текст сообщения
+                number: $("#inputNumber").val(), 
+                text: $("#inputText").val() 
                // } else {
-
             //}
             },
-            Load () ); // по завершению отправки вызываем функцию загрузки новых сообщений Load()
-
+            Load, 
+            "json" ); // по завершению отправки вызываем функцию загрузки новых сообщений Load()
+    load_in_process = false;
     $("#inputText").val(""); // очистим поле ввода сообщения
     $("#inputText").focus(); // и поставим на него фокус
-
     return false; 
 }
 
 var last_message_id = 0; // номер последнего сообщения, что получил пользователь
-var load_in_process = false; // можем ли мы выполнять сейчас загрузку сообщений. Сначала стоит false, что значит - да, можем
-
+// можем ли мы выполнять сейчас загрузку сообщений. Сначала стоит false, что значит - да, можем
 
 function Load() {
     console.log("--load()--" + load_in_process);
@@ -43,7 +44,6 @@ function Load() {
             {
                 act: "load", // указываем на то что это загрузка сообщений
                 last: last_message_id, // передаём номер последнего сообщения оторый получил пользователь в прошлую загрузку
-                rand: (new Date()).getTime()
             },
             function (result) { // в эту функцию в качестве параметра передаётся javascript код, который мы должны выполнить
                // console.log(result)
@@ -51,21 +51,20 @@ function Load() {
                     console.log("Ohm.. We got error");
                 }
                 else if (result.state == "success") {
-                    console.log(result.data);
+                    console.log("data" + result.data);
+                    $("#chat_area").html("");
                     for (elem in result.data) {
+                        console.log(elem);
                         var msg = result.data[elem];
                         var str = JSON.stringify(msg);
                         $("#chat_area").append("<pre>" + str + "</pre><br />");
                      
 //                        var tablestr = "<tr><td>" + msg.id + "</td><td>" 
 //                            + msg.number "</td></tr>";
-//                         $("#chat_area").append(tablestr)                    
-                         
-                        $("#chat_area").append("<pre>" + str + "</pre><br />");
-                        
-                    }
+//                         $("#chat_area").append(tablestr)                      
+                    } 
                 }
-               //oad_in_process = false; // говорим что загрузка закончилась, можем теперь начать новую загрузку
             });
     }
+    Load_in_process = false;
 }

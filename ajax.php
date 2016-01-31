@@ -40,8 +40,6 @@ function Send()
     
     mysqli_query($config,"INSERT INTO sms_tasks (number,text) VALUES ($number,  $text)");
 }
-    
-
 
     // Загрузка смс
 function Load()
