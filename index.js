@@ -34,7 +34,7 @@ var last_message_id = 0; // номер последнего сообщения, 
 // можем ли мы выполнять сейчас загрузку сообщений. Сначала стоит false, что значит - да, можем
 
 function Load() {
-    console.log("--load()--" + load_in_process);
+    console.log("--load()--" + load_in_process + last_message_id);
     // Проверяем можем ли мы загружать сообщения. Это сделано для того, чтобы мы не начали загрузку заново, если старая загрузка ещё не закончилась.
     if(!load_in_process)
     {
@@ -53,9 +53,9 @@ function Load() {
                 else if (result.state == "success") {
                     console.log("data" + result.data);
                     $("#chat_area").html("");
-                    for (elem in result.data) {
-                        console.log(elem);
-                        var msg = result.data[elem];
+                    for (last_message_id in result.data) {
+                        console.log(last_message_id);
+                        var msg = result.data[last_message_id];
                         var str = JSON.stringify(msg);
                         $("#chat_area").append("<pre>" + str + "</pre><br />");
                      
