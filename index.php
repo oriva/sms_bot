@@ -10,7 +10,7 @@
     <script src="js/bootstrap.min.js"></script>
    <!-- <script src="js/common.js"></script> -->
     
-    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="index1.js"></script>
     
   </head>
   <body>        
@@ -40,8 +40,25 @@
     </div>  
       
         <div class="container">
-            <div id="chat_area"><!-- Сюда мы будем добавлять новые сообщения -->
-                <pre><tr><td>Телефон: </td><td>89500521912</td></tr></pre>
+            <div>
+               <div class="bs-example" data-example-id="contextual-table"> 
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-md-1">id</th>
+                            <th class="col-md-1">Номер</th>
+                            <th>Текст</th>
+                            <th class="col-md-1">Дата добавления</th>
+                            <th class="col-md-1">Дата отправки</th>
+                            <th class="col-md-1">Дата получения</th>
+                            <th class="col-md-1">Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody id="chat_area">
+                        <!-- Сюда мы будем добавлять новые сообщения -->
+                    </tbody> 
+                </table> 
+                </div>
             </div>
         </div>  
        
