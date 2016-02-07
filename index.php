@@ -40,12 +40,17 @@
         </div>
         <div class="col-sm-5">
             <h2>Фильтр</h2>
-            <input type="text" class="form-control" id="dateto" value="<?php echo date('d/m/Y'); ?>">
-             - 
-            <input type="text" class="form-control" id="datefrom" value="<?php echo date('d/m/Y'); ?>"><br />
-            <u>*формат (d/n/Y H:i:s).</u>
+            <div class="row">
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="dateto" value="<?php echo date('d/m/Y'); ?>">
+                </div>
+                <div class="col-sm-1"><span class="glyphicon glyphicon-minus" style="padding-top: 7px"></span></div>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="datefrom" value="<?php echo date('d/m/Y'); ?>"><br />
+                </div>
+            </div>
             <p><input type="checkbox"> WAITING <input type="checkbox"> SUCCESSFULL <input type="checkbox"> ERROR </p>
-            <input type="text" placeholder="Телефон">
+            <input type="text" class="form-control" placeholder="Телефон">
         </div>
     </div>
        
