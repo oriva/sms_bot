@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Просмотр смс</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link href="js/jquery-ui-1.11.4/jquery-ui.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+    <script src="js/jquery-ui-1.11.4/jquery-ui.js"></script>
     <script src="js/bootstrap.min.js"></script>
-   <!-- <script src="js/common.js"></script> -->
-    
+    <script src="js/datapicker.js"></script>    
     <script type="text/javascript" src="index.js"></script>
     
   </head>
@@ -21,13 +22,13 @@
               <div class="form-group">
                 <label for="inputNumber" class="col-sm-2 control-label">Телефон</label>
                 <div class="col-sm-10">
-                  <input name="number" type="tel" class="form-control" id="inputNumber" placeholder="Телефон">
+                  <input name="number" type="tel" class="form-control" id="inputNumber" placeholder="Телефон" pattern="[0-9]{11}" title="Введите номер телефона в формате: 8********** (11 знаков)" required>
                 </div>
               </div>
               <div class="form-group">
                 <label for="inputText" class="col-sm-2 control-label">Текст сообщения</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control" name="text" type="text" class="form-control" id="inputText" placeholder="Текст сообщения" rows="3"></textarea>
+                  <textarea class="form-control" name="text" type="text" class="form-control" id="inputText" placeholder="Текст сообщения" rows="3" required></textarea>
                 </div>
               </div>
               <div class="form-group">
@@ -37,8 +38,18 @@
               </div>
             </form>
         </div>
-    </div>  
-      
+        <div class="col-sm-5">
+            <h2>Фильтр</h2>
+            <input type="text" class="form-control" id="dateto" value="<?php echo date('d/m/Y'); ?>">
+             - 
+            <input type="text" class="form-control" id="datefrom" value="<?php echo date('d/m/Y'); ?>"><br />
+            <u>*формат (d/n/Y H:i:s).</u>
+            <p><input type="checkbox"> WAITING <input type="checkbox"> SUCCESSFULL <input type="checkbox"> ERROR </p>
+            <input type="text" placeholder="Телефон">
+        </div>
+    </div>
+       
+         
     <div class="container">
            <div class="bs-example" data-example-id="contextual-table"> 
             <table class="table">
