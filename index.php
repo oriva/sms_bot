@@ -10,7 +10,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
     <script src="js/jquery-ui-1.11.4/jquery-ui.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/datapicker.js"></script>    
+    <script src="js/datapicker.js"></script> 
+    <script src="js/elements.js"></script>   
     <script type="text/javascript" src="index.js"></script>
     
   </head>
@@ -40,18 +41,28 @@
         </div>
         <div class="col-sm-5">
             <h2>Фильтр</h2>
-            <div class="row">
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" id="dateto" value="<?php echo date('d/m/Y'); ?>">
+            <form id="formFilter" class="form-horizontal" method="post" role="form">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="dateto" value="<?php echo date('d/m/Y'); ?>">
+                    </div>
+                    <div class="col-sm-1">
+                        <span class="glyphicon glyphicon-minus" style="padding-top: 7px"></span>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="datefrom" value="<?php echo date('d/m/Y'); ?>"><br />
+                    </div>
                 </div>
-                <div class="col-sm-1"><span class="glyphicon glyphicon-minus" style="padding-top: 7px"></span></div>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" id="datefrom" value="<?php echo date('d/m/Y'); ?>"><br />
-                </div>
-            </div>
-            <p><input type="checkbox"> WAITING <input type="checkbox"> SUCCESSFULL <input type="checkbox"> ERROR </p>
-            <input type="text" class="form-control" placeholder="Телефон">
-        </div>
+                    <p>
+                        <input type="checkbox" id="WAITING"> WAITING 
+                        <input type="checkbox" id="SUCCESSFULL"> SUCCESSFULL 
+                        <input type="checkbox" id="ERROR"> ERROR 
+                    </p>
+                        <input type="text" id="number" class="form-control" placeholder="Телефон">
+                        <button type="button" class="btn btn-primary" style="margin-top: 17px" onclick="pullOut()">Primary</button>
+                
+            </form>
+        </div> 
     </div>
        
          
