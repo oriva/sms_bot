@@ -14,6 +14,8 @@ function pullOut () {
     var pullWAITING = document.getElementById("WAITING").checked;
     var pullSUCCESSFULL = document.getElementById("SUCCESSFULL").checked;
     var pullERROR = document.getElementById("ERROR").checked;
+    pulldateto = pulldateto + " 23:59:59";
+    pulldatefrom = pulldatefrom + " 00:00:00";
     
     if (pullWAITING){
         pullWAITING="WAITING"
