@@ -44,22 +44,22 @@
             <form id="formFilter" class="form-horizontal" method="post" role="form">
                 <div class="row">
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="dateto" value="<?php echo date('d/m/Y'); ?>">
+                        <input type="text" class="form-control" id="datefrom" value="<?php echo date('Y-m-d'); ?>">
                     </div>
                     <div class="col-sm-1">
                         <span class="glyphicon glyphicon-minus" style="padding-top: 7px"></span>
                     </div>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="datefrom" value="<?php echo date('d/m/Y'); ?>"><br />
+                        <input type="text" class="form-control" id="dateto" value="<?php echo date('Y-m-d'); ?>"><br />
                     </div>
                 </div>
                     <p>
-                        <input type="checkbox" id="WAITING"> WAITING 
-                        <input type="checkbox" id="SUCCESSFULL"> SUCCESSFULL 
-                        <input type="checkbox" id="ERROR"> ERROR 
+                        <input type="checkbox" id="WAITING" checked="checked"> WAITING 
+                        <input type="checkbox" id="SUCCESSFULL" checked="checked"> SUCCESSFULL 
+                        <input type="checkbox" id="ERROR" checked="checked"> ERROR 
                     </p>
                         <input type="text" id="number" class="form-control" placeholder="Телефон">
-                        <button type="button" class="btn btn-primary" style="margin-top: 17px" onclick="pullOut()">Primary</button>
+                        <button type="button" class="btn btn-primary" style="margin-top: 17px" onclick="pullOut()">Применить</button>
                 
             </form>
         </div> 

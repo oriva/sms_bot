@@ -6,15 +6,45 @@
 //      alert( attrs[i].name + " = " + attrs[i].value );
 //    }
 
-function pullOut () {
-    var dateto = document.getElementById("dateto").value;
-    var datefrom = document.getElementById("datefrom").value;
-    var number = document.getElementById("number").value;
-    var WAITING = document.getElementById("WAITING").checked;
-    var SUCCESSFULL = document.getElementById("SUCCESSFULL").checked;
-    var ERROR = document.getElementById("ERROR").checked;
+function pullOut () { 
+    //var pulldateto = document.getElementById("dateto").value;
+    var pulldatefrom = $("#datefrom").val();
+    var pulldateto = $("#dateto").val();
+    var pullnumber = $("#number").val();
+    var pullWAITING = document.getElementById("WAITING").checked;
+    var pullSUCCESSFULL = document.getElementById("SUCCESSFULL").checked;
+    var pullERROR = document.getElementById("ERROR").checked;
     
-    console.log(dateto + "  " + datefrom + "  " + number + "  " + WAITING, SUCCESSFULL, ERROR);
-    console.log(typeof dateto);
-    Load;
+    if (pullWAITING){
+        pullWAITING="WAITING"
+    } else {
+        pullWAITING=""
+    };
+    if (pullSUCCESSFULL){
+        pullSUCCESSFULL="SUCCESSFULL"
+    } else {
+        pullSUCCESSFULL=""
+    };
+    if (pullERROR){
+        pullERROR="ERROR"
+    } else {
+        pullERROR=""
+    };
+    
+//    pulldateto.setFullYear(pulldateto.getHours() + 23, pulldateto.getMinutes() + 59, pulldateto.getSeconds() + 59);
+    
+    console.log(pulldateto + "  " + pulldatefrom + "  " + pullnumber + "  " + pullWAITING, pullSUCCESSFULL, pullERROR);
+    
+    
+    var options = {
+        datefrom : pulldatefrom,
+        dateto : pulldateto,
+        number : pullnumber,
+        waiting : pullWAITING,
+        successfull : pullSUCCESSFULL,
+        error : pullERROR,
+    };
+    
+    Load(options);
+    
 }

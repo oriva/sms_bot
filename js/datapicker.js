@@ -1,12 +1,42 @@
 $(document).ready(function() {
- $('body').click(function(event) {
-    if ($(event.target).is("#dateto")) {
-     $("#dateto").datepicker({showOn: 'focus', dateFormat: 'mm/dd/yy'}).focus();    
-    }
-    if ($(event.target).is("#datefrom")) {
-     $("#datefrom").datepicker({showOn: 'focus', dateFormat: 'mm/dd/yy'}).focus();    
-    }
- });
+    
+    /*
+     $('body').click(function(event) {
+        if ($(event.target).is("#dateto")) {
+         $("#dateto").datepicker({showOn: 'focus', dateFormat: 'mm/dd/yy'}).focus();    
+        }
+        if ($(event.target).is("#datefrom")) {
+         $("#datefrom").datepicker({showOn: 'focus', dateFormat: 'mm/dd/yy'}).focus();    
+        }
+     });
+     */
+    
+      
+datepickerTo = $('#dateto');
+datepickerFrom = $('#datefrom');
+
+closeFromFunc = function (selectedDate) {
+    datepickerTo.datepicker("option", "minDate", selectedDate);
+};
+
+closeToFunc = function (selectedDate) {
+    datepickerFrom.datepicker("option", "maxDate", selectedDate);
+};
+
+datepickerFrom.datepicker({
+    dateFormat: "yy-mm-dd",
+    numberOfMonths: 2,
+    onClose: closeFromFunc
+});
+
+datepickerTo.datepicker({
+    dateFormat: "yy-mm-dd",
+    defaultDate: "+1d",
+    numberOfMonths: 2,
+    onClose: closeToFunc
+});
+
+    
 });
 
 //datepickerTo = $('#dateto');
