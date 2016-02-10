@@ -23,7 +23,7 @@
               <div class="form-group">
                 <label for="inputNumber" class="col-sm-2 control-label">Телефон</label>
                 <div class="col-sm-10">
-                  <input name="number" type="tel" class="form-control" id="inputNumber" placeholder="Телефон" pattern="[0-9]{11}" title="Введите номер телефона в формате: 8********** (11 знаков)" required>
+                  <input name="number" type="tel" class="form-control" id="inputNumber" value="+7" placeholder="Телефон" pattern="\+7\s?[0-9]{10}" title="Введите номер телефона в формате: +7**********" required>
                 </div>
               </div>
               <div class="form-group">
