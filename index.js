@@ -39,7 +39,6 @@ function Load(_opts) {
             } else if (result.state == "success") {
                 for (var p in result.data) {
                     var msg = result.data[p];
-                    var str = JSON.stringify(msg);
                     var msgclass;
                     switch (msg.state) {
                     case 'WAITING':
